@@ -662,7 +662,7 @@ const escapeShellArg = arg => {
 
   // return `"${arg.replace(/(["'`\\$])/g, '\\$1')}"`;
   if (/[^A-Za-z0-9_/:=-]/.test(arg)) {
-    arg = "'" + arg.replace(/'/g, "'\\''") + "'";
+    arg = '"' + arg.replace(/'/g, "'\\''") + '"';
     // unduplicate single-quote at the beginning
     arg = arg.replace(/^(?:'')+/g, '').replace(/\\'''/g, "\\'"); // remove non-escaped single-quote if there are enclosed between 2 escaped
   }

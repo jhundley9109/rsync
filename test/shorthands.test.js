@@ -35,7 +35,7 @@ describe('shorthands', function () {
         shell: 'ssh -i /home/user/.ssh/rsync.key'
       });
       assertOutputPattern(rsync,
-        /rsync --rsh='ssh -i \/home\/user\/\.ssh\/rsync\.key' source destination/);
+        /rsync --rsh="ssh -i \/home\/user\/\.ssh\/rsync\.key" source destination/);
     });
   });
 
