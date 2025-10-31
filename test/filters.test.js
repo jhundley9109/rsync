@@ -46,7 +46,7 @@ describe('filters', function () {
         pattern: '/tests/*.test.js'
       }, '-build/*']);
       assertOutput(command,
-        '--exclude=.git --include=/tests/*.test.js --exclude=build/* SOURCE DESTINATION');
+        '--exclude=\'.git\' --include=\'/tests/*.test.js\' --exclude=\'build/*\' SOURCE DESTINATION');
     });
   });
 
@@ -64,7 +64,7 @@ describe('filters', function () {
     it('should add patterns to output in order added', function () {
       command.exclude('.git', 'docs', '/tests/*.test.js');
       assertOutput(command,
-        '--exclude=.git --exclude=docs --exclude=/tests/*.test.js SOURCE DESTINATION');
+        '--exclude=\'.git\' --exclude=docs --exclude=\'/tests/*.test.js\' SOURCE DESTINATION');
     });
   });
 
@@ -82,7 +82,7 @@ describe('filters', function () {
     it('should add patterns to output in order added', function () {
       command.include('LICENSE', 'README.md', 'rsync.js');
       assertOutput(command,
-        '--include=LICENSE --include=README.md --include=rsync.js SOURCE DESTINATION');
+        '--include=LICENSE --include=\'README.md\' --include=\'rsync.js\' SOURCE DESTINATION');
     });
   });
 });

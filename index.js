@@ -421,10 +421,16 @@ class Rsync {
 
     const promise = new Promise((resolve, reject) => {
       // use shell: true because spawn screws up quotes without it
-      const cmdProc = spawn(this.executable(), this.args(), {
+      // don't use shell because it's a security risk. As far as I can tell, this works without sanitizing anything as the spawn function handles the arguments properly
+
+      // const argsSanitized = this.args().join(' ');
+      const argsSanitized = this.args().map(element => element.replace(/"/g, ''));
+
+      // const cmdProc = spawn(this.executable() + ` ${argsSanitized}`, {
+      const cmdProc = spawn(this.executable(), argsSanitized, {
         cwd: this._cwd,
-        env: this._env,
-        shell: true
+        env: this._env
+        // shell: true
       });
 
       cmdProc.stdout.on('data', this._outputHandlers.stdout);
@@ -648,12 +654,20 @@ const buildOption = (name, value, escapeArg) => {
  * @param {string} arg
  * @return {string}
  */
+// Perhaps this is still needed but I have yet to find a reason to use it
 const escapeShellArg = arg => {
-  if (!/(["'`\\$ ])/.test(arg)) {
-    return arg;
+  // if (!/(["'`\\$ ])/.test(arg)) {
+  //   return arg;
+  // }
+
+  // return `"${arg.replace(/(["'`\\$])/g, '\\$1')}"`;
+  if (/[^A-Za-z0-9_/:=-]/.test(arg)) {
+    arg = "'" + arg.replace(/'/g, "'\\''") + "'";
+    // unduplicate single-quote at the beginning
+    arg = arg.replace(/^(?:'')+/g, '').replace(/\\'''/g, "\\'"); // remove non-escaped single-quote if there are enclosed between 2 escaped
   }
 
-  return `"${arg.replace(/(["'`\\$])/g, '\\$1')}"`;
+  return `${arg}`;
 };
 
 /**

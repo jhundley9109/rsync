@@ -10,7 +10,7 @@ const { assertOutput } = require('./helpers/output');
  * unit tests.
  */
 const testCases = [{
-  expect: '-avz --exclude=no-go.txt --exclude="with space" --exclude=.git --exclude=*.tiff path_a/ path_b',
+  expect: '-avz --exclude=\'no-go.txt\' --exclude=\'with space\' --exclude=\'.git\' --exclude=\'*.tiff\' --exclude=\'with quote "\' path_a/ path_b',
   build () {
     return new Rsync()
       .setFlags('avz')
@@ -19,10 +19,11 @@ const testCases = [{
       .exclude('with space')
       .exclude('.git')
       .exclude('*.tiff')
+      .exclude('with quote "')
       .destination('path_b');
   }
 }, {
-  expect: '-rav -f "- .git" test-dir/ test-dir-copy',
+  expect: '-rav -f \'- .git\' test-dir/ test-dir-copy',
   build () {
     return new Rsync()
       .setFlags('rav')

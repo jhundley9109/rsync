@@ -1,6 +1,6 @@
 {
   "name": "rsync2",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Rsync cli wrapper",
   "repository": {
     "type": "git",
