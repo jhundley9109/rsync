@@ -21,7 +21,8 @@
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -p tsconfig.json --watch",
     "clean": "rm -f index.js",
-    "test": "npm run build && semistandard && mocha"
+    "lint": "semistandard \"test/**/*.js\" \"examples/**/*.js\"",
+    "test": "npm run build && npm run lint && mocha"
   },
   "dependencies": {
     "cross-spawn": "^7.0.3",
@@ -35,5 +36,10 @@
     "semistandard": "^17.0.0",
     "sinon": "^15.2.0",
     "typescript": "^6.0.3"
+  },
+  "semistandard": {
+    "ignore": [
+      "index.js"
+    ]
   }
 }
