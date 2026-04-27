@@ -393,7 +393,7 @@ cmd.execute(function(error, stdout, stderr) {
 
 * `execute()` returns a `Promise`
 * Better handling of windows/unix cross platform compatibility
-* Better escape of shell escape sequqences to prevent exploits
+* Better escape of shell escape sequences to prevent exploits
 * `flags()` no longer can unset flags by passing a `false` final parameter. Use `unsetFlags()` instead.
 * `setFlags()` is also available.
 * Support for custom `STDOUT`, `STDERR` and `STDIN` streams

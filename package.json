@@ -15,8 +15,13 @@
   "author": "Jacob Hundley <jhundley9109@gmail.com>",
   "license": "MIT",
   "readmeFilename": "README.md",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "test": "semistandard && mocha"
+    "build": "tsc -p tsconfig.json",
+    "build:watch": "tsc -p tsconfig.json --watch",
+    "clean": "rm -f index.js",
+    "test": "npm run build && semistandard && mocha"
   },
   "dependencies": {
     "cross-spawn": "^7.0.3",
@@ -24,9 +29,11 @@
     "which": "^3.0.1"
   },
   "devDependencies": {
+    "@types/node": "^25.6.0",
     "chai": "^4.3.7",
     "mocha": "^10.2.0",
     "semistandard": "^17.0.0",
-    "sinon": "^15.2.0"
+    "sinon": "^15.2.0",
+    "typescript": "^6.0.3"
   }
 }
